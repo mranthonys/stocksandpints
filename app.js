@@ -143,12 +143,15 @@ mainNav.addEventListener('click', toggleMainNav);
             } else {
               tip.style.display = "none";
             }
+            console.log(showOrHideTip);
           }
         function createListener(validator) {
             return e => {
                 const text = e.target.value;
                 const valid = validator(text);
+                console.log(valid);
                 const showTip = text !== "" && !valid;
+                console.log(showTip);
                 const toolTip = e.target.nextelementSibling;
                 showOrHideTip(showTip, toolTip);
             };
