@@ -82,6 +82,7 @@ mainNav.addEventListener('click', toggleMainNav);
 
         }
 
+        // post data with form
         const form = document.querySelector('.sixy');
 
         function postData(e) {
@@ -120,6 +121,43 @@ mainNav.addEventListener('click', toggleMainNav);
                 }
         }
         form.addEventListener('submit', postData);
+
+        // validate form using regex
+
+        const stock = document.querySelector('.stocks');
+        const brew = document.querySelector('.brew');
+
+        function isValidStock(stock){
+            return /^[a-z]+[0-9]$/.test(stock);
+
+        }
+
+        function isValidBrew(brew){
+            return /^[a-z]+$/.test(brew);
+        }
+
+        function showOrHideTip(show, element) {
+            const tip = document.querySelector('.tip')
+            if (show) {
+              tip.style.display = "inherit";
+            } else {
+              tip.style.display = "none";
+            }
+          }
+        function createListener(validator) {
+            return e => {
+                const text = e.target.value;
+                const valid = validator(text);
+                const showTip = text !== "" && !valid;
+                const toolTip = e.target.nextelementSibling;
+                showOrHideTip(showTip, toolTip);
+            };
+        }
+
+        stock.addEventListener('input', createListener(isValidStock));
+        brew.addEventListener('input', createListener(isValidBrew));
+
+
 
         
 
