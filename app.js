@@ -27,9 +27,12 @@ mainNav.addEventListener('click', toggleMainNav);
             const stocks = document.querySelector('.secondary');
             let tableContents = ''; 
 
-            for (let price of data.prices){
+            for (let [index, price] of data.prices.entries()){
                 tableContents += `
                 <tr>
+                    <td>
+                    ${index +1}
+                    </td>
                     <td>
                         ${price}
                     </td>
@@ -39,6 +42,7 @@ mainNav.addEventListener('click', toggleMainNav);
             const html = `
             <table>
             <tr>
+                <th>Day(s)</th>
               <th>Bitcoin Prices</th>
             </tr>
             ${tableContents}
@@ -47,6 +51,77 @@ mainNav.addEventListener('click', toggleMainNav);
             stocks.innerHTML = html;
             
         }
+
+        fetch('https://api.openbrewerydb.org/breweries?by_state=kentucky')
+            .then(res => res.json())
+            .then(data => generateBeer(data))
+
+        function generateBeer(data) {
+            console.log(data);
+            const beer = document.querySelector('.primary');
+            let otherTable = '';
+
+            for(let brewery of data) {
+                otherTable += `
+                <tr>
+                <td>
+                    ${brewery.name}
+                </td>
+            </tr>`;
+            }
+                const html = `
+                <table>
+                <tr>
+                <th>Choose a Brewery</th>
+                </tr>
+                ${otherTable}
+            </table>
+                `;
+                beer.innerHTML = html;
+
+
+        }
+
+        const form = document.querySelector('.sixy');
+
+        function postData(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const comment = document.getElementById('comment').value;
+
+            const config = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({name: name, comment: comment})
+            }
+
+            fetch('https://jsonplaceholder.typicode.com/comments', config)
+                .then(response => response.json())
+                .then(data => displayOutput(data))
+
+                function displayOutput(data){
+                    console.log(data);
+                    const seven = document.querySelector('.seven');
+
+                seven.innerHTML = `
+                
+                    <h1>Heres your DATA</h1>
+                
+                    <p>Stock Price: ${data.name}</p> 
+                
+                    <p>Brewery: ${data.comment}</p>
+                    
+                    <p>id: ${data.id}</p>
+
+                    `;
+                    
+                }
+        }
+        form.addEventListener('submit', postData);
+
+        
 
 
 
