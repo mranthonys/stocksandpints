@@ -128,7 +128,8 @@ mainNav.addEventListener('click', toggleMainNav);
         const brew = document.querySelector('.brew');
 
         function isValidStock(stock){
-            return /^[a-z]+[0-9]$/.test(stock);
+            console.log(stock);
+            return /^[a-z]+ [0-9]$/.test(stock);
 
         }
 
@@ -137,29 +138,31 @@ mainNav.addEventListener('click', toggleMainNav);
         }
 
         function showOrHideTip(show, element) {
-            const tip = document.querySelector('.tip')
+            const tips = document.getElementsByClassName('tip')
+            const tip = element === 'stocks' ? tips[0] : tips[1];
+            console.log(tip);
             if (show) {
               tip.style.display = "inherit";
+
             } else {
-              tip.style.display = "hidden";
-              console.log(tip);
+              tip.style.display = "none";
             }
             
           }
-        function createListener(validator) {
+        function createListener(validator, toolTip) {
+            console.log('im typing')
             return e => {
                 const text = e.target.value;
                 const valid = validator(text);
                 console.log(valid);
                 const showTip = text !== "" && !valid;
                 console.log(showTip);
-                const toolTip = e.target.nextelementSibling;
                 showOrHideTip(showTip, toolTip);
             };
         }
 
-        stock.addEventListener('input', createListener(isValidStock));
-        brew.addEventListener('input', createListener(isValidBrew));
+        stock.addEventListener('input', createListener(isValidStock, 'stocks'));
+        brew.addEventListener('input', createListener(isValidBrew, 'brew'));
 
         // Parsing my Json File
         fetch('data.json')
