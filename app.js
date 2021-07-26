@@ -141,9 +141,10 @@ mainNav.addEventListener('click', toggleMainNav);
             if (show) {
               tip.style.display = "inherit";
             } else {
-              tip.style.display = "none";
+              tip.style.display = "hidden";
+              console.log(tip);
             }
-            console.log(showOrHideTip);
+            
           }
         function createListener(validator) {
             return e => {
@@ -160,65 +161,26 @@ mainNav.addEventListener('click', toggleMainNav);
         stock.addEventListener('input', createListener(isValidStock));
         brew.addEventListener('input', createListener(isValidBrew));
 
+        // Parsing my Json File
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => displayArray(data))
 
+            function displayArray(data) {
+    const main = document.querySelector('main')
+    let html = '';
 
-        
-
-
-
-
-
-
-
-
-
-
-
-
-const skills = [
-
-{
-    name: 'Javascript',
-    featured: 'OnClick, Arrays and ClickandChange',
-    experience: '5 Months',
-    img: 'https://image.flaticon.com/icons/png/128/919/919828.png'
-}, 
-
-{
-    name: 'CSS',
-    featured: 'Flexbox, Media Queries and :Nth-Chlid',
-    experience: '5 months',
-    img: 'https://cdn.shortpixel.ai/client/q_glossy,ret_img/https://www.highlander.co.uk/wp-content/uploads/2020/09/CSS3Logo-100x100.jpg'
-},
-
-{
-    name: 'HTML',
-    featured: 'Proper Communication with JS',
-    experience: '5 months',
-    img: 'https://www.dev-metal.com/wp-content/uploads/2014/04/html5-1-100x100.jpg'
-},
-
-{
-    name: 'Git/Github',
-    featured: 'Basic professional Knowledge of Git',
-    experience: '5 months',
-    img: 'https://img.icons8.com/ios-filled/2x/github.png'
+        for ( let i = 0; i < skills.length; i++ ) {
+            let skill = skills[i];
+            html += `
+                <img src="${skill.img}" class="arrayImg">
+                <p class="arrayName">${skill.name}</p>
+                <p class="arrayFeatured">${skill.featured}</p>
+                <p class="arrayExperience">${skill.experience}</p>
+                
+            `;
+        }
+    main.insertAdjacentHTML('beforeend', html);   
 }
 
-];
 
-const main = document.querySelector('main')
-let html = '';
-
-for ( let i = 0; i < skills.length; i++ ) {
-    let skill = skills[i];
-    html += `
-        <img src="${skill.img}" class="arrayImg">
-        <p class="arrayName">${skill.name}</p>
-        <p class="arrayFeatured">${skill.featured}</p>
-        <p class="arrayExperience">${skill.experience}</p>
-        
-    `;
-}
-
-main.insertAdjacentHTML('beforeend', html);

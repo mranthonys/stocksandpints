@@ -1,0 +1,26 @@
+[
+    {
+       "name":"Javascript",
+       "featured":"API's & Fetch(), regex and submitting data on a form",
+       "experience":"7 Months",
+       "img":"https://image.flaticon.com/icons/png/128/919/919828.png"
+    },
+    {
+       "name":"CSS",
+       "featured":"Flexbox, Media Queries and :Nth-Chlid",
+       "experience":"7 months",
+       "img":"https://cdn.shortpixel.ai/client/q_glossy,ret_img/https://www.highlander.co.uk/wp-content/uploads/2020/09/CSS3Logo-100x100.jpg"
+    },
+    {
+       "name":"HTML",
+       "featured":"Proper Communication with JS, and Forms",
+       "experience":"7 months",
+       "img":"https://www.dev-metal.com/wp-content/uploads/2014/04/html5-1-100x100.jpg"
+    },
+    {
+       "name":"Git/Github",
+       "featured":"Basic professional Knowledge of Git",
+       "experience":"7 months",
+       "img":"https://img.icons8.com/ios-filled/2x/github.png"
+    }
+ ]
